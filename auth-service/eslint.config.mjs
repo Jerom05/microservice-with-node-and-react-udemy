@@ -69,8 +69,8 @@ export default [
       'no-unsafe-finally': 'error',
       'no-unsafe-negation': 'error',
       'no-unused-labels': 'error',
+      'no-unused-vars': 'warn',
       'no-useless-backreference': 'error',
-      'require-atomic-updates': 'error',
       'use-isnan': 'error',
       'valid-typeof': 'error',
       semi: ['error', 'never'],
@@ -78,7 +78,6 @@ export default [
       indent: ['error', 2],
       'linebreak-style': ['error', 'unix'],
       'keyword-spacing': ['error', { before: true, after: true }],
-      'space-before-function-paren': ['error', 'always'],
       'comma-spacing': ['error', { before: false, after: true }]
     }
   }
