@@ -11,10 +11,13 @@ import {
   signOutRouter,
   signUpRouter
 } from './routes'
+import { errorHandler } from './middlewares'
+import { NotFoundError } from './errors'
 
 dotenv.config()
 
 const app = express()
+app.set('trust proxy', true)
 app.use(json())
 app.use(
   cookieSession({
@@ -26,10 +29,16 @@ app.use(
 app.get('/', (req: Request, res: Response) => {
   res.send('Auth-service')
 })
+
 app.use(currentUserRouter)
 app.use(signInRouter)
 app.use(signOutRouter)
 app.use(signUpRouter)
+
+app.all('*', async (req: Request, res: Response) => {
+  throw new NotFoundError()
+})
+app.use(errorHandler)
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
