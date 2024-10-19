@@ -27,7 +27,6 @@ export default [
       'for-direction': 'error',
       'getter-return': 'error',
       'no-async-promise-executor': 'error',
-      'no-await-in-loop': 'error',
       'no-class-assign': 'error',
       'no-compare-neg-zero': 'error',
       'no-cond-assign': 'error',
