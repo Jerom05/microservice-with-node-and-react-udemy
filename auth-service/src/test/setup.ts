@@ -4,6 +4,8 @@ import { afterAll, beforeAll, beforeEach } from '@jest/globals'
 
 let mongoServer: any
 
+process.env.JWT_KEY = 'TEST_KEY'
+
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create()
   const mongoUri = mongoServer.getUri()
