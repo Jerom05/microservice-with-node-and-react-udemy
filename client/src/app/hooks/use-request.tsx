@@ -34,7 +34,7 @@ const useRequest = ({ url, method, body, onSuccess }: RequestProps) => {
                 <li key={error.message}>{error.message}</li>
               ))}
             </ul>
-          </div>,
+          </div>
         )
       }
     }
