@@ -5,19 +5,23 @@ interface RequestProps {
   url: string
   method: 'get' | 'post' | 'put' | 'delete'
   body: object
+  onSuccess: () => void
 }
 
 interface ErrorResponse {
   errors: Array<{ message: string }>
 }
 
-const useRequest = ({ url, method, body }: RequestProps) => {
+const useRequest = ({ url, method, body, onSuccess }: RequestProps) => {
   const [errors, setErrors] = useState<React.ReactNode | null>(null)
 
   const doRequest = async () => {
     try {
       setErrors(null)
       const response = await axios[method](url, body)
+      if (onSuccess) {
+        onSuccess()
+      }
       return response.data
     } catch (err) {
       if (err instanceof AxiosError && err.response?.data) {

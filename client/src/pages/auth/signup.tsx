@@ -1,16 +1,18 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import useRequest from '../../app/hooks/use-request'
 import '../../app/globals.css'
 
 const Signup = () => {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { doRequest, errors } = useRequest({
     url: '/api/users/signup',
     method: 'post',
     body: { email, password },
+    onSuccess: () => router.push('/'),
   })
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     await doRequest()
