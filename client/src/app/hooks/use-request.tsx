@@ -30,11 +30,11 @@ const useRequest = ({ url, method, body, onSuccess }: RequestProps) => {
           <div className="bg-red-100 border border-red-400 text-red-500 mt-2 mb-2 rounded-md p-3">
             <h4>Oops...</h4>
             <ul className="list-none">
-              {errorData.errors.map((error) => (
+              {errorData?.errors?.map((error) => (
                 <li key={error.message}>{error.message}</li>
               ))}
             </ul>
-          </div>
+          </div>,
         )
       }
     }
