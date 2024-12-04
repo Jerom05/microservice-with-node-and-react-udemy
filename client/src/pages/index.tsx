@@ -7,20 +7,19 @@ interface HomeProps {
 }
 
 const Home = ({ currentUser }: HomeProps) => {
-  console.log({ currentUser })
-  return (
-    <div>
-      <h1>Home page!</h1>
-    </div>
+  return currentUser ? (
+    <h1>You are signed in</h1>
+  ) : (
+    <h1>You are NOT signed in</h1>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const client = buildClient({ req: context.req as NextApiRequest })
-    const response = await client.get('/api/users/currentuser')
+    const { data } = await client.get('/api/users/currentuser')
 
-    return { props: { currentUser: response.data } }
+    return { props: data }
   } catch (error) {
     console.log({ error })
     return { props: {} }
