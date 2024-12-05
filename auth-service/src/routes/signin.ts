@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import { body } from 'express-validator'
 
-import { validateRequest } from '../middlewares'
+import { validateRequest } from '@caltickets/common'
 import { signin } from '../controller/user-controller'
 
 const router = express.Router()
