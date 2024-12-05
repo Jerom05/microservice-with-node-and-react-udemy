@@ -1,11 +1,10 @@
-interface person {
-    name: string,
-    age: number
-}
+import * as errors from './errors'
+import * as middlewares from './middlewares'
 
-const person : person = {
-    name: "calvin",
-    age: 28
-}
+export * from './errors'
+export * from './middlewares'
 
-console.log(person)
+export default {
+  ...errors,
+  ...middlewares
+}
