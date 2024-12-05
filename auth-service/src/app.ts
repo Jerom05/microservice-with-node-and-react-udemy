@@ -10,8 +10,7 @@ import {
   signOutRouter,
   signUpRouter
 } from './routes'
-import { errorHandler } from './middlewares'
-import { NotFoundError } from './errors'
+import { errorHandler, NotFoundError} from '@caltickets/common'
 
 dotenv.config()
 
