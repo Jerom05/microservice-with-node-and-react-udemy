@@ -1,0 +1,33 @@
+import { json } from 'body-parser'
+import cookieSession from 'cookie-session'
+import dotenv from 'dotenv'
+import express, { Request, Response } from 'express'
+import 'express-async-errors'
+
+import { errorHandler, NotFoundError } from '@caltickets/common'
+import { createTicketRouter } from './routes'
+
+dotenv.config()
+
+const app = express()
+app.set('trust proxy', true)
+app.use(json())
+app.use(
+  cookieSession({
+    signed: false,
+    secure: process.env.NODE_ENV !== 'test'
+  })
+)
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Tickets-service')
+})
+
+app.use(createTicketRouter)
+
+app.all('*', async (req: Request, res: Response) => {
+  throw new NotFoundError()
+})
+app.use(errorHandler)
+
+export { app }
