@@ -5,7 +5,12 @@ import express, { Request, Response } from 'express'
 import 'express-async-errors'
 
 import { errorHandler, NotFoundError, currentUser } from '@caltickets/common'
-import { newOrderRouter, indexOrderRouter, deleteOrderRouter } from './routes'
+import {
+  newOrderRouter,
+  indexOrderRouter,
+  deleteOrderRouter,
+  showOrderRouter
+} from './routes'
 
 dotenv.config()
 
@@ -26,7 +31,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use(newOrderRouter)
 app.use(indexOrderRouter)
 app.use(deleteOrderRouter)
-
+app.use(showOrderRouter)
 app.all('*', async (req: Request, res: Response) => {
   throw new NotFoundError()
 })
