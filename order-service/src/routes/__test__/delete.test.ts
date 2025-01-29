@@ -32,4 +32,10 @@ it('marks an order as cancelled', async () => {
   expect(updatedOrder!.status).toEqual(OrderStatus.Cancelled)
 })
 
-it.todo('emits a order cancelled event')
+it('emits a order cancelled event', async () => {
+  const ticket = Ticket.build({
+    title: 'concert',
+    price: 20
+  })
+  await ticket.save()
+})
