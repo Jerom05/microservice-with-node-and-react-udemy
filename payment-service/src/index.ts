@@ -3,6 +3,9 @@ import mongoose from 'mongoose'
 import { natsWrapper } from './nats-wrapper'
 import { app } from './app'
 
+import { OrderCreatedListener } from './events/listeners/order-created-listener'
+import { OrderCancelledListener } from './events/listeners/order-cancelled-listener'
+
 const start = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined')
@@ -21,6 +24,9 @@ const start = async () => {
     await mongoose.connect(process.env.db_url!)
     console.log(process.env.db_url)
     console.log('Connected to MongoDb')
+
+    new OrderCreatedListener(natsWrapper.client).listen()
+    new OrderCancelledListener(natsWrapper.client).listen()
 
     await natsWrapper.connect(
       process.env.NATS_CLUSTER_ID,

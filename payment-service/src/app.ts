@@ -6,6 +6,8 @@ import 'express-async-errors'
 
 import { errorHandler, NotFoundError, currentUser } from '@caltickets/common'
 
+import { createChargeRouter } from './routes'
+
 dotenv.config()
 
 const app = express()
@@ -22,6 +24,7 @@ app.use(currentUser)
 app.get('/', (req: Request, res: Response) => {
   res.send('Tickets-service')
 })
+app.use(createChargeRouter)
 
 app.all('*', async (req: Request, res: Response) => {
   throw new NotFoundError()
