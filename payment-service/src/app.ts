@@ -5,12 +5,8 @@ import express, { Request, Response } from 'express'
 import 'express-async-errors'
 
 import { errorHandler, NotFoundError, currentUser } from '@caltickets/common'
-import {
-  createTicketRouter,
-  indexTicketRouter,
-  showTicketRouter,
-  updateTicketRouter
-} from './routes'
+
+import { createChargeRouter } from './routes'
 
 dotenv.config()
 
@@ -28,10 +24,7 @@ app.use(currentUser)
 app.get('/', (req: Request, res: Response) => {
   res.send('Tickets-service')
 })
-app.use(createTicketRouter)
-app.use(showTicketRouter)
-app.use(indexTicketRouter)
-app.use(updateTicketRouter)
+app.use(createChargeRouter)
 
 app.all('*', async (req: Request, res: Response) => {
   throw new NotFoundError()
