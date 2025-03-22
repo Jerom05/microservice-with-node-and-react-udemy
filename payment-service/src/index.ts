@@ -25,9 +25,6 @@ const start = async () => {
     console.log(process.env.db_url)
     console.log('Connected to MongoDb')
 
-    new OrderCreatedListener(natsWrapper.client).listen()
-    new OrderCancelledListener(natsWrapper.client).listen()
-
     await natsWrapper.connect(
       process.env.NATS_CLUSTER_ID,
       process.env.NATS_CLIENT_ID,
@@ -39,6 +36,9 @@ const start = async () => {
     })
     process.on('SIGINT', () => natsWrapper.client.close())
     process.on('SIGTERM', () => natsWrapper.client.close())
+
+    new OrderCreatedListener(natsWrapper.client).listen()
+    new OrderCancelledListener(natsWrapper.client).listen()
   } catch (err) {
     console.error(err)
   }
