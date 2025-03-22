@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-service
+  namespace: default
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
@@ -13,31 +14,39 @@ spec:
           - path: /api/payments/?(.*)
             pathType: ImplementationSpecific
             backend:
-              serviceName: payment-service
-              servicePort: 3000
+              service:
+                name: payment-service
+                port:
+                  number: 3000
+
           - path: /api/users/?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: auth-service
-                port: 
+                port:
                   number: 3000
+
           - path: /api/tickets/?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: ticket-service
-                port: 
+                port:
                   number: 3000
+
           - path: /api/orders/?(.*)
             pathType: ImplementationSpecific
             backend:
-              serviceName: order-service
-              servicePort: 3000    
+              service:
+                name: order-service
+                port:
+                  number: 3000
+
           - path: /?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: client-service
-                port: 
+                port:
                   number: 3000
