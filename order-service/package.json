@@ -23,7 +23,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@caltickets/common": "^1.0.18",
+    "@caltickets/common": "^1.0.19",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "cookie-session": "^2.1.0",
