@@ -13,7 +13,7 @@ const App = ({
     <div>
       <Header currentUser={currentUser} />
       <hr />
-      <Component {...pageProps} />
+      <Component {...pageProps} currentUser={currentUser} />
     </div>
   )
 }
