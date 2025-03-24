@@ -11,18 +11,28 @@ const Header = ({ currentUser }: { currentUser: object | null }) => {
     )
     .map(({ label, href }) => {
       return (
-        <li key={href} className="nav-item">
-          <Link href={href}>{label}</Link>
+        <li key={href} className="ml-4">
+          <Link 
+            href={href}
+            className="text-blue-600 hover:text-blue-800 transition-colors"
+          >
+            {label}
+          </Link>
         </li>
       )
     })
 
   return (
-    <nav className="navbar navbar-light bg-light">
-      <Link href="/">GitTix</Link>
+    <nav className="bg-gray-100 p-4 flex items-center justify-between">
+      <Link 
+        href="/" 
+        className="text-xl font-bold text-gray-800 hover:text-gray-600"
+      >
+        GitTix
+      </Link>
 
-      <div className="d-flex justify-content-end">
-        <ul className="nav d-flex align-items-center">{links}</ul>
+      <div className="flex items-center">
+        <ul className="flex items-center">{links}</ul>
       </div>
     </nav>
   )
