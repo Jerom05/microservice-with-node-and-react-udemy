@@ -12,7 +12,7 @@ const Home = ({ currentUser }: HomeProps) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   try {
     return { props: {} }
   } catch (error) {
