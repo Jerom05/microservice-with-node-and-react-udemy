@@ -1,5 +1,3 @@
-import buildClient from '@/app/api/build-client'
-import { NextApiRequest } from 'next'
 import { GetServerSideProps } from 'next'
 
 interface HomeProps {
@@ -14,12 +12,9 @@ const Home = ({ currentUser }: HomeProps) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const client = buildClient({ req: context.req as NextApiRequest })
-    const { data } = await client.get('/api/users/currentuser')
-
-    return { props: data }
+    return { props: {} }
   } catch (error) {
     console.log({ error })
     return { props: {} }
