@@ -12,7 +12,7 @@ const Header = ({ currentUser }: { currentUser: object | null }) => {
     .map(({ label, href }) => {
       return (
         <li key={href} className="ml-4">
-          <Link 
+          <Link
             href={href}
             className="text-blue-600 hover:text-blue-800 transition-colors"
           >
@@ -24,8 +24,8 @@ const Header = ({ currentUser }: { currentUser: object | null }) => {
 
   return (
     <nav className="bg-gray-100 p-4 flex items-center justify-between">
-      <Link 
-        href="/" 
+      <Link
+        href="/"
         className="text-xl font-bold text-gray-800 hover:text-gray-600"
       >
         GitTix
