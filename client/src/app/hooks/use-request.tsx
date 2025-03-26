@@ -5,7 +5,7 @@ interface RequestProps {
   url: string
   method: 'get' | 'post' | 'put' | 'delete'
   body: object
-  onSuccess: () => void
+  onSuccess: (data: string | { id: string }) => void
 }
 
 interface ErrorResponse {
@@ -20,7 +20,7 @@ const useRequest = ({ url, method, body, onSuccess }: RequestProps) => {
       setErrors(null)
       const response = await axios[method](url, body)
       if (onSuccess) {
-        onSuccess()
+        onSuccess(response.data)
       }
       return response.data
     } catch (err) {
