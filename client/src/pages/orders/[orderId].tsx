@@ -5,8 +5,16 @@ import {
   NextApiRequest,
 } from 'next'
 import buildClient from '@/app/api/build-client'
+import StripeCheckout from 'react-stripe-checkout'
 
-const ShowOrder = ({ order }: { order: { expiresAt: string } }) => {
+interface Order {
+  expiresAt: string
+  ticket: {
+    price: number
+  }
+}
+
+const ShowOrder = ({ order }: { order: Order }) => {
   const [timeLeft, setTimeLeft] = useState(0)
 
   useEffect(() => {
@@ -31,6 +39,12 @@ const ShowOrder = ({ order }: { order: { expiresAt: string } }) => {
   return (
     <div>
       <h1>Time left to pay {timeLeft} seconds</h1>
+      <StripeCheckout
+        token={(token) => console.log({ token })}
+        stripeKey="pk_test_51Q0HS72KAUv40crStTxLBJZuCZcNW9s7sDUFlL8YXDC5ntqbYjiOhzycuVANXUFFuJ49E0I5oi3LPFT6aJkNs78i00Rt4VojPZ"
+        amount={order.ticket.price * 100}
+        email="a@b.com"
+      />
     </div>
   )
 }
