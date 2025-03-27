@@ -15,10 +15,10 @@ interface ErrorResponse {
 const useRequest = ({ url, method, body, onSuccess }: RequestProps) => {
   const [errors, setErrors] = useState<React.ReactNode | null>(null)
 
-  const doRequest = async () => {
+  const doRequest = async (props: object = {}) => {
     try {
       setErrors(null)
-      const response = await axios[method](url, body)
+      const response = await axios[method](url, { ...body, ...props })
       if (onSuccess) {
         onSuccess(response.data)
       }
