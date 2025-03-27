@@ -6,8 +6,10 @@ import {
 } from 'next'
 import buildClient from '@/app/api/build-client'
 import StripeCheckout from 'react-stripe-checkout'
+import useRequest from '@/app/hooks/use-request'
 
 interface Order {
+  id: string
   expiresAt: string
   ticket: {
     price: number
@@ -16,6 +18,15 @@ interface Order {
 
 const ShowOrder = ({ order }: { order: Order }) => {
   const [timeLeft, setTimeLeft] = useState(0)
+
+  const { doRequest, errors } = useRequest({
+    url: '/api/payments',
+    method: 'post',
+    body: {
+      orderId: order.id,
+    },
+    onSuccess: (payment) => console.log(payment),
+  })
 
   useEffect(() => {
     const findTimeLeft = () => {
@@ -40,11 +51,12 @@ const ShowOrder = ({ order }: { order: Order }) => {
     <div>
       <h1>Time left to pay {timeLeft} seconds</h1>
       <StripeCheckout
-        token={(token) => console.log({ token })}
+        token={({ id }) => doRequest({ token: id })}
         stripeKey="pk_test_51Q0HS72KAUv40crStTxLBJZuCZcNW9s7sDUFlL8YXDC5ntqbYjiOhzycuVANXUFFuJ49E0I5oi3LPFT6aJkNs78i00Rt4VojPZ"
         amount={order.ticket.price * 100}
         email="a@b.com"
       />
+      {errors}
     </div>
   )
 }
